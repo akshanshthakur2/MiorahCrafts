@@ -1,76 +1,74 @@
 import React from 'react';
-import { Instagram, Twitter, Mail, MapPin } from 'lucide-react';
+import { Instagram, MessageCircle, ArrowUpRight } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-white border-t border-stone-200 pt-16 pb-8 px-6">
+    <footer className="bg-white border-t border-stone-100 px-6 py-12">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+        
+        {/* Top Section: Split Layout */}
+        <div className="flex flex-col md:flex-row justify-between items-start gap-12 mb-12">
           
-          {/* Brand Section */}
-          <div className="col-span-1 md:col-span-1">
-            <h2 className="text-2xl font-serif font-bold italic tracking-tight mb-4">
-              Miorah.
+          {/* LEFT: Brand & Navigation */}
+          <div className="space-y-4">
+            <h2 className="text-2xl font-serif font-bold tracking-tighter text-stone-900">
+              Miorah<span className="text-[#b91c1c]">.</span>
             </h2>
-            <p className="text-stone-500 text-sm leading-relaxed">
-              Crafting timeless pieces that bring the soul of artisanal work into your modern living space.
+            <nav className="flex gap-6 text-[10px] font-black uppercase tracking-[0.2em] text-stone-400">
+              <a href="/gallery" className="hover:text-[#b91c1c] transition-colors">Archive</a>
+              <a href="/about" className="hover:text-[#b91c1c] transition-colors">Process</a>
+              <a href="/contact" className="hover:text-[#b91c1c] transition-colors">Inquiry</a>
+            </nav>
+          </div>
+
+          {/* RIGHT: Studio Info & Newsletter */}
+          <div className="w-full md:w-96 text-right md:text-right flex flex-col items-end">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-900 mb-2">
+              The Studio
             </p>
-          </div>
-
-          {/* Quick Links */}
-          <div>
-            <h4 className="font-semibold text-stone-900 mb-4 uppercase tracking-widest text-xs">Shop</h4>
-            <ul className="space-y-2 text-sm text-stone-600">
-              <li><a href="/" className="hover:text-emerald-700 transition-colors">All Collections</a></li>
-              <li><a href="/gallery" className="hover:text-emerald-700 transition-colors">New Arrivals</a></li>
-              <li><a href="/about" className="hover:text-emerald-700 transition-colors">Our Process</a></li>
-            </ul>
-          </div>
-
-          {/* Support */}
-          <div>
-            <h4 className="font-semibold text-stone-900 mb-4 uppercase tracking-widest text-xs">Support</h4>
-            <ul className="space-y-2 text-sm text-stone-600">
-              <li><a href="/contact" className="hover:text-emerald-700 transition-colors">Contact Us</a></li>
-              <li><a href="#" className="hover:text-emerald-700 transition-colors">Shipping Policy</a></li>
-              <li><a href="#" className="hover:text-emerald-700 transition-colors">WhatsApp FAQ</a></li>
-            </ul>
-          </div>
-
-          {/* Newsletter */}
-          <div>
-            <h4 className="font-semibold text-stone-900 mb-4 uppercase tracking-widest text-xs">Newsletter</h4>
-            <p className="text-sm text-stone-500 mb-4">Join for early access to new drops.</p>
-            <div className="flex gap-2">
+            <p className="text-stone-500 text-[11px] leading-relaxed mb-6 max-w-[280px]">
+              Sculpting organic forms from the earth of Bengaluru. <br/> 
+              Available for custom commissions and interior styling.
+            </p>
+            
+            <div className="w-full relative group border-b border-stone-200">
               <input 
                 type="email" 
-                placeholder="Email address" 
-                className="bg-stone-100 border-none rounded-full px-4 py-2 text-sm w-full focus:ring-1 focus:ring-emerald-500 outline-none"
+                placeholder="JOIN THE INNER CIRCLE" 
+                className="w-full bg-transparent py-2 text-[10px] tracking-widest outline-none focus:placeholder-transparent uppercase text-right"
               />
-              <button className="bg-stone-900 text-white p-2 rounded-full hover:bg-stone-700 transition-all">
-                <Mail size={18} />
+              <button className="absolute left-0 bottom-2 text-stone-400 hover:text-[#b91c1c]">
+                <ArrowUpRight size={16} />
               </button>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-stone-100 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-stone-400 text-xs">
-            © {currentYear} Miorah Crafts. Designed for the modern home.
-          </p>
-          
-          <div className="flex gap-6 text-stone-400">
-            <a href="#" className="hover:text-emerald-600 transition-colors"><Instagram size={20} /></a>
-            <a href="#" className="hover:text-emerald-600 transition-colors"><Twitter size={20} /></a>
-            <div className="flex items-center gap-1 text-xs">
-              <MapPin size={14} />
-              <span>Handcrafted in [City Name]</span>
+        {/* BOTTOM: Minimal Bar */}
+        <div className="pt-8 border-t border-stone-50 flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="flex items-center gap-8">
+            <p className="text-stone-300 text-[9px] font-bold uppercase tracking-[0.3em]">
+              © {currentYear} Miorah
+            </p>
+            <div className="flex gap-4 items-center">
+              <a href="#" className="text-stone-400 hover:text-stone-900 transition-transform hover:-translate-y-1">
+                <Instagram size={16} />
+              </a>
+              <a href="#" className="text-stone-400 hover:text-stone-900 transition-transform hover:-translate-y-1">
+                <MessageCircle size={16} />
+              </a>
             </div>
           </div>
+
+          <div className="flex gap-6 text-[9px] font-bold uppercase tracking-widest text-stone-300">
+            <span>Handcrafted in India</span>
+            <span className="hidden md:inline">•</span>
+            <span>All Rights Reserved</span>
+          </div>
         </div>
+
       </div>
     </footer>
   );

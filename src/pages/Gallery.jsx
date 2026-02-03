@@ -1,24 +1,32 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { products } from '../data/products';
-import { Instagram, Expand } from 'lucide-react';
+import { Instagram, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const Gallery = () => {
-  // We can use the product images, or a separate gallery array if you have one.
+  const navigate = useNavigate();
+
   return (
-    <div className="pt-32 pb-20 bg-[#fafaf9] min-h-screen px-6">
+    <div className="pt-32 pb-20 bg-[#fbfbfb] min-h-screen px-6">
       <div className="max-w-6xl mx-auto">
         
-        {/* Gallery Header */}
-        <header className="mb-16 border-l-2 border-emerald-600 pl-8">
-          <h1 className="text-5xl font-serif text-stone-900 mb-4">The Archive</h1>
-          <p className="text-stone-500 max-w-md text-sm leading-relaxed tracking-wide">
-            A curated collection of past works, studio moments, and the organic textures that inspire our daily craft.
+        {/* Header */}
+        <header className="mb-20 flex flex-col items-center text-center">
+          <span className="text-[#b91c1c] text-[10px] font-black uppercase tracking-[0.4em] mb-4">
+            Homemade Archive
+          </span>
+          <h1 className="text-5xl md:text-7xl font-serif text-stone-900 tracking-tight">
+            The <span className="italic text-stone-400 font-light">Collection.</span>
+          </h1>
+          <p className="text-stone-400 text-[10px] uppercase tracking-[0.2em] mt-4 font-bold">
+            Crafted in Lalitpur, Nepal
           </p>
+          <div className="h-[1px] w-12 bg-stone-200 mt-8" />
         </header>
 
-        {/* Dense Grid - 4 columns for that 'compact' look */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {/* Masonry-Style Grid */}
+        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-8 space-y-10">
           {products.map((item, index) => (
             <motion.div
               key={item.id}
@@ -26,44 +34,60 @@ const Gallery = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}
-              className="group relative aspect-[4/5] overflow-hidden rounded-lg bg-stone-200"
+              onClick={() => navigate(`/product/${item.id}`)}
+              className="break-inside-avoid group cursor-pointer"
             >
-              {/* Image with slow zoom on hover */}
-              <img 
-                src={item.image} 
-                alt={item.name} 
-                className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-110"
-              />
+              {/* Card Container */}
+              <div className="bg-white p-4 rounded-[2rem] shadow-sm border border-stone-100 transition-all duration-500 hover:shadow-2xl hover:shadow-stone-200/60">
+                <div className="relative overflow-hidden rounded-[1.5rem] bg-stone-50">
+                  <img 
+                    src={item.image} 
+                    alt={item.name} 
+                    className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
 
-              {/* Minimalist Hover Overlay */}
-              <div className="absolute inset-0 bg-stone-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6">
-                <p className="text-white/70 text-[10px] uppercase tracking-[0.3em] mb-1">
-                  {item.category}
-                </p>
-                <h3 className="text-white text-sm font-serif">{item.name}</h3>
-                <div className="mt-4 w-8 h-[1px] bg-emerald-500 group-hover:w-16 transition-all duration-500" />
+                <div className="mt-6 px-2 pb-2">
+                  <div className="space-y-3">
+                    {/* ENLARGED TITLE */}
+                    <h3 className="text-xl md:text-2xl font-serif text-stone-900 leading-tight group-hover:text-[#b91c1c] transition-colors">
+                      {item.name}
+                    </h3>
+                    
+                    <div className="flex justify-between items-end">
+                      <p className="text-[10px] text-stone-400 uppercase tracking-widest font-bold">
+                        {item.category}
+                      </p>
+                      {/* ENLARGED BOLD PRICE */}
+                      <span className="text-xl md:text-2xl font-black text-stone-900">
+                        ₹{item.price.toLocaleString('en-IN')}
+                      </span>
+                    </div>
+                  </div>
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Footer Link to Socials */}
+        {/* Bottom Social Section */}
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          className="mt-24 text-center border-t border-stone-200 pt-16"
+          className="mt-32 text-center"
         >
-          <div className="inline-flex flex-col items-center">
-            <Instagram className="text-stone-400 mb-4" size={24} />
-            <h2 className="text-2xl font-serif text-stone-900 mb-2">Follow our process</h2>
-            <p className="text-stone-500 text-sm mb-8">Get a daily look behind the scenes at our studio.</p>
+          <div className="inline-flex flex-col items-center p-12 bg-white rounded-[3rem] border border-stone-100 shadow-sm w-full max-w-2xl mx-auto">
+            <Instagram className="text-[#b91c1c] mb-6" size={24} />
+            <h2 className="text-3xl font-serif text-stone-900 mb-4 tracking-tight">Follow the process</h2>
+            <p className="text-stone-500 text-sm mb-8">Lalitpur, Nepal • Homemade Crafts • 2026</p>
             <a 
-              href="https://instagram.com" 
+              href={import.meta.env.VITE_INSTAGRAM_URL || "#"} 
               target="_blank" 
               rel="noreferrer"
-              className="px-10 py-3 border border-stone-900 text-stone-900 rounded-full font-bold hover:bg-stone-900 hover:text-white transition-all uppercase text-xs tracking-widest"
+              className="flex items-center gap-3 px-8 py-3 bg-stone-900 text-white rounded-full font-bold hover:bg-[#b91c1c] transition-all uppercase text-[10px] tracking-widest"
             >
-              @miorah_crafts
+              <span>@akshansh_thakur25</span>
+              <ArrowRight size={14} />
             </a>
           </div>
         </motion.div>

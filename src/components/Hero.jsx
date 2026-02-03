@@ -29,7 +29,7 @@ const Hero = () => {
                   to fill the empty space, but keep it subtle */}
               <Sphere args={[1, 100, 200]} scale={isMobile ? 1.4 : 1.8}>
                 <MeshDistortMaterial
-                  color="#1a1a1a" 
+                  color="#ddd12f" 
                   speed={2} 
                   distort={0.4} 
                   radius={1}
@@ -68,7 +68,7 @@ const Hero = () => {
              
              {/* Descriptive text to fill the "empty" vertical space on mobile */}
              <p className="max-w-[250px] md:max-w-none text-stone-500 mt-6 text-[11px] md:text-[9px] uppercase tracking-[0.2em] leading-relaxed font-medium">
-                Artisanal Studio • LALITPUR <br className="md:hidden" /> Established 2026
+                HAND CRAFTED • INDIA •<br className="md:hidden" /> 2026
              </p>
           </motion.div>
           

@@ -1,98 +1,119 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Heart, Sparkles, Earth } from 'lucide-react';
+import { Heart, Home, Leaf, ArrowRight } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const About = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="pt-32 pb-20 bg-[#fafaf9] min-h-screen">
-      <div className="max-w-5xl mx-auto px-6">
+    <div className="pt-32 pb-20 bg-[#fbfbfb] min-h-screen px-6">
+      <div className="max-w-6xl mx-auto">
         
-        {/* Hero Section */}
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center mb-32">
+        {/* Hero Section - The Personal Touch */}
+        <header className="mb-24 text-center">
+          <motion.span 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-[#b91c1c] font-black tracking-[0.4em] uppercase text-[10px] mb-6 block"
+          >
+            Our Story
+          </motion.span>
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-6xl md:text-8xl font-serif text-stone-900 mb-8 tracking-tighter leading-[0.9]"
+          >
+            Made by hand. <br />
+            <span className="italic text-stone-400 font-light">In my home.</span>
+          </motion.h1>
+          <div className="h-[1px] w-20 bg-stone-200 mx-auto mt-12" />
+        </header>
+
+        {/* Narrative Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-32 items-center">
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="relative"
+            className="rounded-[3rem] overflow-hidden shadow-2xl shadow-stone-200/50"
           >
-            <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl">
-              <img 
-                src="https://images.unsplash.com/photo-1459749411177-042180ce673c?q=80&w=800" 
-                alt="Artisan at work" 
-                className="w-full h-full object-cover"
-              />
-            </div>
-            {/* Decorative element */}
-            <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-emerald-600/10 rounded-full blur-3xl -z-10" />
+            <img 
+              src="https://images.unsplash.com/photo-1565191999001-551c187427bb?q=80&w=800" 
+              alt="Handmade process" 
+              className="w-full h-auto"
+            />
           </motion.div>
-
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            <span className="text-emerald-700 font-bold tracking-[0.3em] text-[10px] uppercase">Our Philosophy</span>
-            <h1 className="text-5xl font-serif text-stone-900 leading-tight">Crafting with <br/>Patience & Soul.</h1>
-            <p className="text-stone-600 leading-relaxed text-lg">
-              Miorah was born out of a desire to return to the slow, intentional beauty of handmade objects. In a world of mass production, we believe in the "perfect imperfections" that only human hands can create.
-            </p>
-            <p className="text-stone-500 italic">
-              "Every piece tells a story of the earth it came from and the hands that shaped it."
-            </p>
-          </motion.div>
-        </section>
-
-        {/* Values Section */}
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-12 py-20 border-t border-stone-200">
-          <div className="space-y-4">
-            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm">
-              <Earth size={20} className="text-emerald-700" />
+          
+          <div className="space-y-8">
+            <h2 className="text-4xl font-serif text-stone-900 leading-tight">
+              A journey from <br/> <span className="text-[#b91c1c] italic">Lalitpur</span> to your living space.
+            </h2>
+            <div className="space-y-6 text-stone-500 text-lg leading-relaxed">
+              <p>
+                Miorah Crafts started as a simple passion project in my home workshop in Lalitpur. What began as an exploration of clay and texture has grown into a collection of pieces designed to bring warmth and soul into modern homes.
+              </p>
+              <p>
+                I don't use assembly lines or industrial machinery. Every curve is shaped by my hands, and every imperfection is a deliberate celebration of the organic process.
+              </p>
             </div>
-            <h3 className="text-xl font-serif text-stone-900">Earth First</h3>
-            <p className="text-sm text-stone-500 leading-relaxed">
-              We source our raw materials locally and sustainably, ensuring that our footprint is as light as our designs.
-            </p>
           </div>
+        </div>
 
-          <div className="space-y-4">
-            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm">
-              <Sparkles size={20} className="text-emerald-700" />
-            </div>
-            <h3 className="text-xl font-serif text-stone-900">Timeless Design</h3>
-            <p className="text-sm text-stone-500 leading-relaxed">
-              Our aesthetic blends ancient techniques with modern minimalism to create pieces that never go out of style.
-            </p>
-          </div>
+        {/* Values Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32">
+          {[
+            {
+              icon: <Home className="text-[#b91c1c]" />,
+              title: "Homemade",
+              desc: "Crafted entirely within a home environment in Lalitpur, ensuring every piece receives personal attention."
+            },
+            {
+              icon: <Heart className="text-[#b91c1c]" />,
+              title: "Heartfelt",
+              desc: "I create objects that I would want in my own space—pieces that carry a story and a pulse."
+            },
+            {
+              icon: <Leaf className="text-[#b91c1c]" />,
+              title: "Sustainable",
+              desc: "Using locally sourced materials and eco-friendly methods to minimize our footprint on the earth."
+            }
+          ].map((item, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+              className="p-10 bg-white rounded-[2.5rem] border border-stone-100 shadow-sm"
+            >
+              <div className="mb-6">{item.icon}</div>
+              <h3 className="text-xl font-serif text-stone-900 mb-4">{item.title}</h3>
+              <p className="text-stone-500 text-sm leading-relaxed">{item.desc}</p>
+            </motion.div>
+          ))}
+        </div>
 
-          <div className="space-y-4">
-            <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center shadow-sm">
-              <Heart size={20} className="text-emerald-700" />
-            </div>
-            <h3 className="text-xl font-serif text-stone-900">Made for Living</h3>
-            <p className="text-sm text-stone-500 leading-relaxed">
-              Every item is crafted to be used, held, and cherished in the quiet moments of your daily life.
-            </p>
-          </div>
-        </section>
-
-        {/* Studio Invite */}
+        {/* Call to Action */}
         <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-20 p-12 bg-stone-900 rounded-3xl text-center text-white"
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          className="bg-stone-900 rounded-[3rem] p-12 md:p-20 text-center text-white relative overflow-hidden"
         >
-          <h2 className="text-3xl font-serif mb-6">Have a custom project in mind?</h2>
-          <p className="text-stone-400 mb-8 max-w-lg mx-auto">
-            We love collaborating on bespoke pieces for homes, studios, and galleries. Let's create something together.
-          </p>
-          <button 
-            onClick={() => window.location.href = '/contact'}
-            className="bg-emerald-600 hover:bg-emerald-500 text-white px-8 py-4 rounded-full font-bold transition-all"
-          >
-            Get in Touch
-          </button>
+          <div className="absolute top-0 left-0 w-full h-full opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-stone-500 via-transparent to-transparent" />
+          
+          <div className="relative z-10 max-w-2xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-serif mb-8 tracking-tight">
+              Ready to explore <br/> the <span className="italic font-light">Archive?</span>
+            </h2>
+            <button 
+              onClick={() => navigate('/gallery')}
+              className="inline-flex items-center gap-3 px-10 py-4 bg-white text-stone-900 rounded-full font-bold hover:bg-[#b91c1c] hover:text-white transition-all uppercase text-[10px] tracking-widest shadow-xl"
+            >
+              View Collection
+              <ArrowRight size={14} />
+            </button>
+          </div>
         </motion.div>
 
       </div>
