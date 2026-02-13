@@ -1,42 +1,38 @@
 export const products = [
   {
     id: 1,
-    name: "Hand-Thrown Ceramic Vase",
-    price: 85,
-    image: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?q=80&w=800",
-    description: "A minimalist stoneware vase with a raw clay exterior and a matte white glazed interior. Perfect for dried botanicals.",
-    category: "Ceramics"
+    name: "ZEWER — Diptych Collection",
+    size: "16” * 20” (Set of 2)",
+    price: 3999,
+    category: "Wall Art",
+    image: "/images/ZEWER-3999.jpg",
+    description: "The complete ZEWER experience. This two-canvas diptych features continuous hand-sculpted gold undulations and flowing pearl pathways. A 16' x 20' set meticulously crafted in our home workshop in India to create a grand, textured statement."
   },
   {
     id: 2,
-    name: "Organic Cotton Macrame",
-    price: 120,
-    image: "https://images.unsplash.com/photo-1528892677828-8862216f3665?q=80&w=800",
-    description: "Intricately knotted wall hanging made from 100% recycled organic cotton cord on a salvaged driftwood branch.",
-    category: "Textiles"
+    name: "ZEWER — Single Edition",
+    size: "16” * 20”",
+    price: 2499,
+    category: "Wall Art",
+    image: "/images/ZEWER-2499-single.jpg",
+    description: "The essence of ZEWER in a single frame. This 16' x 20' canvas showcases intricate gold-sculpted textures and signature pearl accents. Handcrafted in India, it is perfectly sized for smaller spaces while maintaining homemade elegance."
   },
   {
     id: 3,
-    name: "Pure Soy Sculptural Candle",
-    price: 35,
-    image: "https://images.unsplash.com/photo-1602872030219-497c36741178?q=80&w=800",
-    description: "Unscented soy wax candle in a geometric wave shape. Designed to be an art piece for your coffee table.",
-    category: "Decor"
+    name: "ROOP — Minimalist Set",
+    size: "10” * 12” (Set of 2)",
+    price: 1200,
+    category: "Wall Art",
+    image: "/images/ROOP-Double.jpg",
+    description: "Very minimal but strong—like calm with a touch of drama. The ROOP collection features bold white organic textures set against a striking deep red border. This 10' x 12' set is handcrafted in India for a quiet but powerful artistic statement."
   },
   {
     id: 4,
-    name: "Linen Table Runner",
-    price: 45,
-    image: "https://images.unsplash.com/photo-1515825838458-f2a94b20105a?q=80&w=800",
-    description: "Heavyweight European linen in a soft oatmeal hue. Finished with a simple hand-stitched hem.",
-    category: "Textiles"
-  },
-  {
-    id: 5,
-    name: "Terracotta Planter Set",
-    price: 60,
-    image: "https://images.unsplash.com/photo-1610701596007-11502861dcfa?q=80&w=800",
-    description: "A set of three hand-painted planters with drainage holes. Featuring subtle earth-tone gradients.",
-    category: "Ceramics"
+    name: "ROOP — Single Edition",
+    size: "10” * 12”",
+    price: 800,
+    category: "Wall Art",
+    image: "/images/ROOP-Single.jpg",
+    description: "A single 10' x 12' study in minimalism. This piece from the ROOP collection captures the balance of calm and drama through stark white textures and bold red framing. Handcrafted in our workshop in India for focused aesthetic impact."
   }
 ];
