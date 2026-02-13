@@ -23,20 +23,20 @@ const Footer = () => {
             </nav>
           </div>
 
-          {/* RIGHT: Studio Info & Newsletter */}
+          {/* RIGHT: Personalized Home Workshop Info & Newsletter */}
           <div className="w-full md:w-96 text-right md:text-right flex flex-col items-end">
             <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-stone-900 mb-2">
-              The Studio
+              The Workshop
             </p>
             <p className="text-stone-500 text-[11px] leading-relaxed mb-6 max-w-[280px]">
-              Sculpting organic forms from the earth of Bengaluru. <br/> 
-              Available for custom commissions and interior styling.
+              Shaping organic forms by hand from the earth of Lalitpur. <br/> 
+              Available for personal commissions and custom handmade gifts.
             </p>
             
             <div className="w-full relative group border-b border-stone-200">
               <input 
                 type="email" 
-                placeholder="JOIN THE INNER CIRCLE" 
+                placeholder="JOIN THE CIRCLE" 
                 className="w-full bg-transparent py-2 text-[10px] tracking-widest outline-none focus:placeholder-transparent uppercase text-right"
               />
               <button className="absolute left-0 bottom-2 text-stone-400 hover:text-[#b91c1c]">
@@ -53,17 +53,17 @@ const Footer = () => {
               © {currentYear} Miorah
             </p>
             <div className="flex gap-4 items-center">
-              <a href="#" className="text-stone-400 hover:text-stone-900 transition-transform hover:-translate-y-1">
+              <a href={import.meta.env.VITE_INSTAGRAM_URL || "#"} target="_blank" rel="noreferrer" className="text-stone-400 hover:text-stone-900 transition-transform hover:-translate-y-1">
                 <Instagram size={16} />
               </a>
-              <a href="#" className="text-stone-400 hover:text-stone-900 transition-transform hover:-translate-y-1">
+              <a href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer" className="text-stone-400 hover:text-stone-900 transition-transform hover:-translate-y-1">
                 <MessageCircle size={16} />
               </a>
             </div>
           </div>
 
           <div className="flex gap-6 text-[9px] font-bold uppercase tracking-widest text-stone-300">
-            <span>Handcrafted in India</span>
+            <span>Handmade in Lalitpur</span>
             <span className="hidden md:inline">•</span>
             <span>All Rights Reserved</span>
           </div>
