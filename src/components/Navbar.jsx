@@ -8,7 +8,6 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
-  // Env variables
   const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER;
   const INSTAGRAM_URL = import.meta.env.VITE_INSTAGRAM_URL;
 
@@ -35,7 +34,6 @@ const Navbar = () => {
     { name: 'Contact', path: '/contact' },
   ];
 
-  // Real WhatsApp SVG Icon
   const WhatsAppIcon = ({ size = 20 }) => (
     <svg 
       viewBox="0 0 24 24" 
@@ -49,7 +47,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav className={`fixed w-full z-[100] transition-all duration-300 px-6 py-4 ${
+    <nav className={`fixed w-full z-[100] transition-all duration-300 px-6 py-5 ${
       scrolled ? 'bg-white/80 backdrop-blur-md shadow-sm' : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto flex justify-between items-center">
@@ -60,12 +58,12 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-10">
+        <div className="hidden md:flex items-center gap-12">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               to={link.path}
-              className={`text-[10px] font-black uppercase tracking-[0.2em] transition-colors hover:text-[#b91c1c] ${
+              className={`text-[10px] font-black uppercase tracking-[0.3em] transition-colors hover:text-[#b91c1c] ${
                 location.pathname === link.path ? 'text-[#b91c1c]' : 'text-stone-500'
               }`}
             >
@@ -73,34 +71,29 @@ const Navbar = () => {
             </Link>
           ))}
           
-          <div className="flex items-center gap-5 border-l border-stone-200 pl-10">
+          {/* Icons without the Shop button */}
+          <div className="flex items-center gap-6 border-l border-stone-200 pl-12">
             <a 
               href={INSTAGRAM_URL} 
               target="_blank" 
               rel="noreferrer" 
-              className="text-stone-400 hover:text-stone-900 transition-colors"
+              className="text-stone-400 hover:text-stone-900 transition-all duration-300 hover:scale-110"
             >
               <Instagram size={18} />
             </a>
             <button 
               onClick={handleWhatsAppClick}
-              className="text-stone-400 hover:text-[#25D366] transition-colors"
+              className="text-stone-400 hover:text-[#25D366] transition-all duration-300 hover:scale-110"
               aria-label="Chat on WhatsApp"
             >
               <WhatsAppIcon size={18} />
-            </button>
-            <button 
-              onClick={handleWhatsAppClick}
-              className="flex items-center gap-2 bg-stone-900 text-white px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-[#b91c1c] transition-all"
-            >
-              <span>Shop</span>
             </button>
           </div>
         </div>
 
         {/* Mobile Toggle */}
         <div className="md:hidden flex items-center gap-5 relative z-[110]">
-          <button onClick={handleWhatsAppClick} className="text-stone-900">
+          <button onClick={handleWhatsAppClick} className="text-stone-900 active:scale-90 transition-transform">
             <WhatsAppIcon size={20} />
           </button>
           <button 
@@ -116,17 +109,18 @@ const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            className="fixed inset-0 top-0 left-0 w-full h-screen bg-white z-[105] p-6 md:hidden flex flex-col pt-32"
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed inset-0 w-full h-screen bg-white z-[105] p-8 md:hidden flex flex-col justify-center"
           >
-            <div className="flex flex-col gap-8">
+            <div className="flex flex-col gap-10">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`text-4xl font-serif ${
+                  className={`text-5xl font-serif tracking-tighter ${
                     location.pathname === link.path ? 'text-[#b91c1c]' : 'text-stone-800'
                   }`}
                 >
@@ -134,21 +128,15 @@ const Navbar = () => {
                 </Link>
               ))}
               
-              <div className="mt-10 pt-10 border-t border-stone-100 flex flex-col gap-6">
-                 <div className="flex gap-6">
-                    <a href={INSTAGRAM_URL} className="flex items-center gap-2 text-stone-400 font-bold uppercase text-[10px] tracking-widest">
-                       <Instagram size={18} /> Instagram
+              <div className="mt-12 pt-12 border-t border-stone-100 flex flex-col gap-8">
+                 <div className="flex gap-10">
+                    <a href={INSTAGRAM_URL} className="flex items-center gap-3 text-stone-400 font-black uppercase text-[10px] tracking-[0.3em]">
+                       <Instagram size={20} /> Instagram
                     </a>
-                    <button onClick={handleWhatsAppClick} className="flex items-center gap-2 text-stone-400 font-bold uppercase text-[10px] tracking-widest">
-                       <WhatsAppIcon size={18} /> WhatsApp
+                    <button onClick={handleWhatsAppClick} className="flex items-center gap-3 text-stone-400 font-black uppercase text-[10px] tracking-[0.3em]">
+                       <WhatsAppIcon size={20} /> WhatsApp
                     </button>
                  </div>
-                 <button 
-                   onClick={handleWhatsAppClick}
-                   className="w-full flex justify-center items-center gap-3 bg-stone-900 text-white py-5 rounded-2xl font-black uppercase text-[10px] tracking-[0.2em] shadow-xl active:scale-95 transition-transform"
-                 >
-                   Open Shop
-                 </button>
               </div>
             </div>
           </motion.div>
