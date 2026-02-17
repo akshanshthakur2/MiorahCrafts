@@ -25,8 +25,6 @@ const Hero = () => {
           
           <Suspense fallback={null}>
             <Float speed={3} rotationIntensity={1} floatIntensity={2}>
-              {/* On mobile, we make the sphere slightly larger than before (1.4) 
-                  to fill the empty space, but keep it subtle */}
               <Sphere args={[1, 100, 200]} scale={isMobile ? 1.4 : 1.8}>
                 <MeshDistortMaterial
                   color="#ddd12f" 
@@ -50,7 +48,6 @@ const Hero = () => {
           transition={{ duration: 1, ease: "easeOut" }}
           className="flex flex-col items-center w-full"
         >
-          {/* Main Title - Increased mobile size to 7xl to fill width */}
           <h1 className="text-7xl md:text-[13rem] font-serif text-[#b91c1c] leading-[0.8] select-none tracking-tighter drop-shadow-md">
             Miorah
           </h1>
@@ -66,7 +63,6 @@ const Hero = () => {
              </p>
              <div className="h-[1px] w-16 bg-[#b91c1c] mt-3 opacity-60" />
              
-             {/* Descriptive text to fill the "empty" vertical space on mobile */}
              <p className="max-w-[250px] md:max-w-none text-stone-500 mt-6 text-[11px] md:text-[9px] uppercase tracking-[0.2em] leading-relaxed font-medium">
                 HAND CRAFTED • INDIA •<br className="md:hidden" /> 2026
              </p>
@@ -89,11 +85,34 @@ const Hero = () => {
         </motion.div>
       </div>
 
-      {/* Bottom decorative info for mobile (fills bottom space) */}
-      <div className="absolute bottom-10 w-full text-center md:hidden">
-        <p className="text-[9px] text-stone-400 uppercase tracking-[0.4em]">
-          Scroll to Discover
-        </p>
+      {/* ADJUSTED: Scroll Indicator positioned at bottom center */}
+      <div className="absolute bottom-8 left-0 right-0 flex flex-col items-center pointer-events-none">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.8, duration: 1 }}
+          className="flex flex-col items-center gap-4"
+        >
+          {/* Vertical Scrolling Line */}
+          <div className="w-[1px] h-16 bg-stone-200 relative overflow-hidden">
+            <motion.div 
+              animate={{ 
+                y: ["-100%", "100%"],
+              }}
+              transition={{ 
+                duration: 2.5, 
+                repeat: Infinity, 
+                ease: "linear" 
+              }}
+              className="absolute top-0 left-0 w-full h-full bg-[#b91c1c]"
+            />
+          </div>
+          
+          {/* Minimalist Label */}
+          <span className="text-[8px] text-stone-400 font-black uppercase tracking-[0.6em] ml-[0.6em]">
+            Scroll
+          </span>
+        </motion.div>
       </div>
     </section>
   );
