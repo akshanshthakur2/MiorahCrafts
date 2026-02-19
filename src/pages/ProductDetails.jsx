@@ -43,7 +43,6 @@ const ProductDetails = () => {
       animate={{ opacity: 1 }}
       className="relative z-10 pt-32 pb-20 px-6 max-w-6xl mx-auto"
     >
-      {/* Lightbox Component */}
       <Lightbox
         open={open}
         close={() => setOpen(false)}

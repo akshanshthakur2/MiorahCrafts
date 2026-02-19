@@ -11,6 +11,7 @@ import About from './pages/About';
 import Gallery from './pages/Gallery';
 import Contact from './pages/Contact';
 import ProductDetails from './pages/ProductDetails'; // Import the new page
+import Admin from './pages/Admin';
 
 // Helper to reset scroll position on every page change
 const ScrollToTop = () => {
@@ -34,6 +35,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/admin" element={<Admin />} />
             
             {/* Dynamic Route: The ':id' acts as a variable */}
             <Route path="/product/:id" element={<ProductDetails />} />
