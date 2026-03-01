@@ -79,7 +79,7 @@ app.post("/api/products", upload.single("image"), async (req, res) => {
     if (!req.file) {
       return res.status(400).json({ error: "Please upload an image for the art." });
     }
-    
+
     // req.file is created by Multer. filename is the new name we gave it above.
     const imagePath = `/uploads/${req.file.filename}`;
 
@@ -95,6 +95,34 @@ app.post("/api/products", upload.single("image"), async (req, res) => {
     await newProduct.save();
     res.status(201).json(newProduct);
   } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+app.put('/api/products/:id', upload.single('image'), async (req, res) => {
+  try {
+    const { name, size, price, category, description } = req.body;
+    let updateData = { name, size, price, category, description };
+
+    // If a new image was uploaded via the Edit form, update the path
+    if (req.file) {
+      updateData.image = `/uploads/${req.file.filename}`;
+    }
+
+    const updatedProduct = await Product.findByIdAndUpdate(
+      req.params.id, 
+      updateData, 
+      { new: true } // This returns the updated document to the frontend
+    );
+
+    if (!updatedProduct) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.status(200).json(updatedProduct);
+  } catch (error) {
+    console.error("Update Error:", error);
     res.status(500).json({ error: error.message });
   }
 });
