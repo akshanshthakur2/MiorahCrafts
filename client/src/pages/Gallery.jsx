@@ -1,17 +1,24 @@
-import React, { useState, useEffect } from 'react'; // Added useState & useEffect
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-// Removed: import { products } from '../data/products'; 
-import { Instagram, ArrowRight, MapPin, Loader2 } from 'lucide-react'; // Added Loader icon
+import { Instagram, ArrowRight, MapPin, Loader2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Gallery = () => {
   const navigate = useNavigate();
-  
-  // 1. New State for dynamic data
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // 2. Fetch data from your local server
+  // Helper function to resolve image paths
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return '';
+    // If it's a new upload from Multer, point to the server port
+    if (imagePath.startsWith('/uploads')) {
+      return `http://localhost:5000${imagePath}`;
+    }
+    // Otherwise, it's a static image in client/public/images
+    return imagePath;
+  };
+
   useEffect(() => {
     const fetchGallery = async () => {
       try {
@@ -32,7 +39,6 @@ const Gallery = () => {
     <div className="pt-32 pb-20 bg-[#fbfbfb] min-h-screen px-6">
       <div className="max-w-7xl mx-auto">
         
-        {/* Header - Remains the same */}
         <header className="mb-24 flex flex-col items-center text-center">
           <div className="flex items-center gap-3 mb-4">
             <MapPin size={14} className="text-[#b91c1c]" />
@@ -49,7 +55,6 @@ const Gallery = () => {
           <div className="h-[1px] w-20 bg-stone-200 mt-10" />
         </header>
 
-        {/* 3. Loading State UI */}
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20">
             <Loader2 className="animate-spin text-stone-300 mb-4" size={40} />
@@ -59,7 +64,7 @@ const Gallery = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
             {products.map((item, index) => (
               <motion.div
-                key={item._id} // Changed from item.id to item._id (MongoDB format)
+                key={item._id}
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ 
@@ -67,19 +72,17 @@ const Gallery = () => {
                   duration: 0.8,
                   ease: "easeOut"
                 }}
-                onClick={() => navigate(`/product/${item._id}`)} // Updated to _id
+                onClick={() => navigate(`/product/${item._id}`)}
                 className="flex flex-col group cursor-pointer"
               >
-                {/* Product Card Container */}
                 <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2.5rem] bg-stone-100 mb-8 shadow-sm border border-stone-100 transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2">
                   <img 
-                    src={item.image} 
+                    src={getImageUrl(item.image)} // Using the helper function here
                     alt={item.name} 
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                     loading="eager"
                   />
                   
-                  {/* View Detail Overlay */}
                   <div className="absolute bottom-6 left-6 right-6 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all duration-300">
                     <div className="bg-white/95 backdrop-blur-md p-5 rounded-2xl flex justify-between items-center shadow-xl border border-white/20">
                       <span className="text-[10px] font-black uppercase tracking-widest text-[#b91c1c]">View Detail</span>
@@ -88,7 +91,6 @@ const Gallery = () => {
                   </div>
                 </div>
 
-                {/* Product Info */}
                 <div className="flex flex-col flex-grow px-2">
                   <h3 className="text-3xl font-serif text-stone-900 leading-tight group-hover:text-[#b91c1c] transition-colors">
                     {item.name}
@@ -112,7 +114,6 @@ const Gallery = () => {
           </div>
         )}
 
-        {/* Bottom Social Section Remains the same */}
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}

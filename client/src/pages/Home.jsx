@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react"; // Added hooks
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Hero from "../components/Hero";
 import ArtisanNote from "../components/ArtisanNote";
-// Removed: import { products } from "../data/products";
 import { useNavigate } from "react-router-dom";
 import { ArrowRight, MapPin, Loader2 } from "lucide-react";
 
@@ -11,14 +10,22 @@ const Home = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // 1. Helper function to handle image paths (Same as Gallery)
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return '';
+    if (imagePath.startsWith('/uploads')) {
+      return `http://localhost:5000${imagePath}`;
+    }
+    return imagePath;
+  };
+
   useEffect(() => {
     const fetchFeatured = async () => {
       try {
         const response = await fetch("http://localhost:5000/api/products");
         const data = await response.json();
 
-        // Instead of hardcoded numeric IDs, we filter by name or specific criteria
-        // This ensures your "Featured" section always has the hero pieces
+        // Filtering for your specific hero pieces by name
         const featuredNames = [
           "ROOP — Single Edition",
           "ZEWER — Single Edition",
@@ -75,17 +82,19 @@ const Home = () => {
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-20">
             {featuredProducts.map((item, index) => (
               <motion.div
-                key={item._id} // Using MongoDB _id
+                key={item._id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.8 }}
-                onClick={() => navigate(`/product/${item._id}`)} // Navigate by _id
+                // 2. Ensure we use item._id for the URL
+                onClick={() => navigate(`/product/${item._id}`)}
                 className="flex flex-col group cursor-pointer"
               >
                 <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2.5rem] bg-stone-100 mb-8 shadow-sm border border-stone-100 transition-all duration-500 group-hover:shadow-2xl group-hover:-translate-y-2">
                   <img
-                    src={item.image}
+                    // 3. Use getImageUrl helper
+                    src={getImageUrl(item.image)}
                     alt={item.name}
                     className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                   />

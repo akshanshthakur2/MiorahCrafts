@@ -1,8 +1,8 @@
-import React, { useState } from "react"; // Added useState
+import React, { useState, useEffect } from "react"; // Added useEffect
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Truck, ShieldCheck, MapPin, Maximize2 } from "lucide-react";
-import { products } from "../data/products";
+import { ArrowLeft, Truck, ShieldCheck, MapPin, Maximize2, Loader2 } from "lucide-react"; // Added Loader2
+// Removed: import { products } from "../data/products";
 
 // Lightbox Imports
 import Lightbox from "yet-another-react-lightbox";
@@ -12,18 +12,36 @@ import "yet-another-react-lightbox/styles.css";
 const ProductDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false); // State to control lightbox
+  const [open, setOpen] = useState(false);
+  
+  // 1. Added state for database data
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER;
-  const product = products.find((p) => p.id === parseInt(id));
 
-  if (!product) {
-    return (
-      <div className="pt-40 text-center font-serif text-stone-500">
-        Piece not found.
-      </div>
-    );
-  }
+  // 2. Helper for images (Handles local vs server uploads)
+  const getImageUrl = (path) => {
+    if (!path) return '';
+    return path.startsWith('/uploads') ? `http://localhost:5000${path}` : path;
+  };
+
+  // 3. Fetch specific product from MongoDB
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(`http://localhost:5000/api/products/${id}`);
+        if (!response.ok) throw new Error("Product not found");
+        const data = await response.json();
+        setProduct(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Fetch Error:", error);
+        setLoading(false);
+      }
+    };
+    fetchProduct();
+  }, [id]);
 
   const handleWhatsApp = (e) => {
     e.preventDefault();
@@ -37,6 +55,24 @@ const ProductDetails = () => {
     window.open(url, "_blank");
   };
 
+  // 4. Loading State UI
+  if (loading) {
+    return (
+      <div className="pt-60 text-center flex flex-col items-center gap-4">
+        <Loader2 className="animate-spin text-stone-300" size={40} />
+        <p className="text-stone-400 uppercase tracking-widest text-[10px] font-bold">Verifying Archive...</p>
+      </div>
+    );
+  }
+
+  if (!product) {
+    return (
+      <div className="pt-40 text-center font-serif text-stone-500">
+        Piece not found in the archive.
+      </div>
+    );
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -46,7 +82,7 @@ const ProductDetails = () => {
       <Lightbox
         open={open}
         close={() => setOpen(false)}
-        slides={[{ src: product.image }]}
+        slides={[{ src: getImageUrl(product.image) }]} // Updated to use helper
         plugins={[Zoom]}
         animation={{ zoom: 500 }}
         zoom={{
@@ -81,7 +117,7 @@ const ProductDetails = () => {
           </div>
 
           <img
-            src={product.image}
+            src={getImageUrl(product.image)} // Updated to use helper
             alt={product.name}
             className="w-full aspect-[4/5] object-cover rounded-[2.5rem] transition-transform duration-700 group-hover:scale-[1.02]"
           />
