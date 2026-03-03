@@ -9,7 +9,11 @@ require("dotenv").config();
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: ["http://localhost:5173", "https://miorah-crafts.vercel.app", "https://miorah-crafts-git-me-e7123b-contactakshansh0-gmailcoms-projects.vercel.app/"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}));
 app.use(express.json()); // Allows the server to accept JSON data from your Admin form
 
 // This line allows your website to see the images in the uploads folder
@@ -135,5 +139,5 @@ app.delete("/api/products/:id", async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`🚀 Server is live on https://miorah-backend.onrender.com/`);
+  console.log(`🚀 Server is live on https://miorah-backend.onrender.com/  `);
 });
