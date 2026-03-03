@@ -13,7 +13,7 @@ const Gallery = () => {
     if (!imagePath) return '';
     // If it's a new upload from Multer, point to the server port
     if (imagePath.startsWith('/uploads')) {
-      return `http://localhost:5000${imagePath}`;
+      return `https://miorah-backend.onrender.com${imagePath}`;
     }
     // Otherwise, it's a static image in client/public/images
     return imagePath;
@@ -22,7 +22,7 @@ const Gallery = () => {
   useEffect(() => {
     const fetchGallery = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/products');
+        const response = await fetch('https://miorah-backend.onrender.com/api/products');
         const data = await response.json();
         setProducts(data);
         setLoading(false);

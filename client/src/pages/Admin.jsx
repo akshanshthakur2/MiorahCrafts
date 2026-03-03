@@ -33,7 +33,7 @@ const Admin = () => {
   const fetchProducts = async () => {
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:5000/api/products");
+      const res = await fetch("https://miorah-backend.onrender.com/api/products");
       const data = await res.json();
       setProducts(data);
     } catch (err) {
@@ -112,8 +112,8 @@ const handleLogin = (e) => {
 
     // 1. Ensure the URL includes the ID when editing
     const url = isEditing
-      ? `http://localhost:5000/api/products/${isEditing}`
-      : "http://localhost:5000/api/products";
+      ? `https://miorah-backend.onrender.com/api/products/${isEditing}`
+      : "https://miorah-backend.onrender.com/api/products";
 
     const method = isEditing ? "PUT" : "POST";
 
@@ -167,7 +167,7 @@ const handleLogin = (e) => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          await fetch(`http://localhost:5000/api/products/${id}`, {
+          await fetch(`https://miorah-backend.onrender.com/api/products/${id}`, {
             method: "DELETE",
           });
           fetchProducts();
@@ -381,7 +381,7 @@ const handleLogin = (e) => {
                   <img
                     src={
                       item.image.startsWith("/uploads")
-                        ? `http://localhost:5000${item.image}`
+                        ? `https://miorah-backend.onrender.com${item.image}`
                         : item.image
                     }
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"

@@ -14,7 +14,7 @@ const Home = () => {
   const getImageUrl = (imagePath) => {
     if (!imagePath) return '';
     if (imagePath.startsWith('/uploads')) {
-      return `http://localhost:5000${imagePath}`;
+      return `https://miorah-backend.onrender.com${imagePath}`;
     }
     return imagePath;
   };
@@ -22,7 +22,7 @@ const Home = () => {
   useEffect(() => {
     const fetchFeatured = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/products");
+        const response = await fetch("https://miorah-backend.onrender.com/api/products");
         const data = await response.json();
 
         // Filtering for your specific hero pieces by name

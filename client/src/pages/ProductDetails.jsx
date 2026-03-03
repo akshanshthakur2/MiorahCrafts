@@ -23,14 +23,14 @@ const ProductDetails = () => {
   // 2. Helper for images (Handles local vs server uploads)
   const getImageUrl = (path) => {
     if (!path) return '';
-    return path.startsWith('/uploads') ? `http://localhost:5000${path}` : path;
+    return path.startsWith('/uploads') ? `https://miorah-backend.onrender.com${path}` : path;
   };
 
   // 3. Fetch specific product from MongoDB
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/products/${id}`);
+        const response = await fetch(`https://miorah-backend.onrender.com/api/products/${id}`);
         if (!response.ok) throw new Error("Product not found");
         const data = await response.json();
         setProduct(data);

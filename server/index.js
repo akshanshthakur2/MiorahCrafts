@@ -135,5 +135,5 @@ app.delete("/api/products/:id", async (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`🚀 Server is live on http://localhost:${PORT}`);
+  console.log(`🚀 Server is live on https://miorah-backend.onrender.com/`);
 });
