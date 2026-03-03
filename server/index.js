@@ -10,7 +10,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ["http://localhost:5173", "https://miorah-crafts.vercel.app", "https://miorah-crafts-git-me-e7123b-contactakshansh0-gmailcoms-projects.vercel.app/"],
+  origin: ["http://localhost:5173", "https://miorah-crafts.vercel.app", "https://miorah-crafts-git-me-e7123b-contactakshansh0-gmailcoms-projects.vercel.app"],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
